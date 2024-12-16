@@ -1,68 +1,85 @@
-import talib as ta
+
 import pandas as pd
+import numpy as np
+
+def apply_technical_indicators(data):
+    """
+    Apply technical indicators to the stock data.
+    Adds columns for Simple Moving Average (SMA), Relative Strength Index (RSI), and MACD.
+    """
+    try:
+        # Simple Moving Average (SMA)
+        data['SMA_50'] = data['Close'].rolling(window=50).mean()
+        data['SMA_200'] = data['Close'].rolling(window=200).mean()
+        
+        # Relative Strength Index (RSI)
+        delta = data['Close'].diff()
+        gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
+        loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
+        rs = gain / loss
+        data['RSI'] = 100 - (100 / (1 + rs))
+        
+        # MACD (12-day EMA - 26-day EMA) and Signal Line (9-day EMA of MACD)
+        ema_12 = data['Close'].ewm(span=12, adjust=False).mean()
+        ema_26 = data['Close'].ewm(span=26, adjust=False).mean()
+        data['MACD'] = ema_12 - ema_26
+        data['Signal_Line'] = data['MACD'].ewm(span=9, adjust=False).mean()
+        
+        return data
+    
+    except Exception as e:
+        raise RuntimeError(f"Error applying technical indicators: {e}")
+
+def calculate_financial_metrics(data):
+    """
+    Calculate financial metrics for the stock data.
+    Adds columns for Daily Returns and Cumulative Returns.
+    """
+    try:
+        # Daily Returns
+        data['Daily_Returns'] = data['Close'].pct_change()
+        
+        # Cumulative Returns
+        data['Cumulative_Returns'] = (1 + data['Daily_Returns']).cumprod()
+        
+        return data
+    
+    except Exception as e:
+        raise RuntimeError(f"Error calculating financial metrics: {e}")
+
 import matplotlib.pyplot as plt
 
-def apply_technical_indicators(df):
-    # Calculate Simple Moving Average (SMA)
-    df['SMA_20'] = ta.SMA(df['Close'], timeperiod=20)
+def visualize_stock_data(data):
+    """
+    Visualize the stock data along with technical indicators.
+    Creates subplots for prices, SMA, RSI, and MACD.
+    """
+    try:
+        # Create subplots
+        fig, axs = plt.subplots(3, 1, figsize=(14, 10), sharex=True)
+        
+        # Plot Closing Prices and SMAs
+        axs[0].plot(data.index, data['Close'], label='Close', color='blue')
+        axs[0].plot(data.index, data['SMA_50'], label='SMA 50', color='orange')
+        axs[0].plot(data.index, data['SMA_200'], label='SMA 200', color='green')
+        axs[0].set_title('Closing Prices and SMAs')
+        axs[0].legend()
+        
+        # Plot RSI
+        axs[1].plot(data.index, data['RSI'], label='RSI', color='purple')
+        axs[1].axhline(70, color='red', linestyle='--', label='Overbought')
+        axs[1].axhline(30, color='green', linestyle='--', label='Oversold')
+        axs[1].set_title('Relative Strength Index (RSI)')
+        axs[1].legend()
+        
+        # Plot MACD and Signal Line
+        axs[2].plot(data.index, data['MACD'], label='MACD', color='blue')
+        axs[2].plot(data.index, data['Signal_Line'], label='Signal Line', color='orange')
+        axs[2].set_title('MACD')
+        axs[2].legend()
+        
+        plt.tight_layout()
+        return plt.show()
     
-    # Calculate Relative Strength Index (RSI)
-    df['RSI_14'] = ta.RSI(df['Close'], timeperiod=14)
-    
-    # Calculate Moving Average Convergence Divergence (MACD)
-    df['MACD'], df['MACD_signal'], df['MACD_hist'] = ta.MACD(df['Close'], 
-                                                              fastperiod=12, 
-                                                              slowperiod=26, 
-                                                              signalperiod=9)
-    
-
-    
-    return df
-
-def calculate_financial_metrics(df):
-    # Example: Calculate daily returns using PyNance
-    df['daily_return'] = df['Close'].pct_change()
-    
-
-    return df
-
-def load_stock_data(file_path):
-    # Load the stock price data
-    df = pd.read_csv(file_path, parse_dates=['Date'], index_col='Date')
-    
-    # Ensure the data has the necessary columns
-    required_columns = ['Open', 'High', 'Low', 'Close', 'Volume']
-    if not all(column in df.columns for column in required_columns):
-        raise ValueError(f"Data must include the following columns: {required_columns}")
-    
-    
-    return df
-
-def visualize_stock_data(df):
-    plt.figure(figsize=(14, 7))
-    
-    # Plot Closing Price
-    plt.subplot(3, 1, 1)
-    plt.plot(df.index, df['Close'], label='Close Price')
-    plt.plot(df.index, df['SMA_20'], label='20-Day SMA')
-    plt.title('Stock Closing Price and SMA')
-    plt.legend()
-    
-    # Plot RSI
-    plt.subplot(3, 1, 2)
-    plt.plot(df.index, df['RSI_14'], label='RSI (14)')
-    plt.axhline(y=70, color='r', linestyle='--')
-    plt.axhline(y=30, color='g', linestyle='--')
-    plt.title('RSI (14)')
-    plt.legend()
-    
-    # Plot MACD
-    plt.subplot(3, 1, 3)
-    plt.plot(df.index, df['MACD'], label='MACD')
-    plt.plot(df.index, df['MACD_signal'], label='Signal Line')
-    plt.bar(df.index, df['MACD_hist'], label='MACD Histogram')
-    plt.title('MACD')
-    plt.legend()
-    
-    plt.tight_layout()
-    plt.show()
+    except Exception as e:
+        raise RuntimeError(f"Error visualizing stock data: {e}")
