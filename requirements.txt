@@ -1,0 +1,8 @@
+pandas==1.3.3  # Data analysis library
+numpy==1.21.2  # Numeric data handling
+TA-Lib==0.4.0   # Technical Analysis Library for Python
+PyNance==0.11.1 # Financial metrics library
+nltk==3.6.3     # Natural Language Processing Toolkit
+spacy==3.2.1    # Library for advanced NLP tasks
+matplotlib
+seaborn
