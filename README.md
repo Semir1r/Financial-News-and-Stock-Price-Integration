@@ -1,79 +1,154 @@
-Task 1 News Data Analysis Project
-This repository contains the code and analysis for exploring and analyzing news datasets. The project focuses on Exploratory Data Analysis (EDA), text analysis, time series analysis, and publisher insights. Project Overview
+Nova Financial Solutions - Predictive Analytics Project
+Table of Contents
+Introduction
+Task 1: Git and GitHub
+Task 2: Quantitative Analysis using PyNance and TA-Lib
+Task 3: Correlation between News and Stock Movement
+Getting Started
+Folder Structure
+KPIs and Requirements
+Contributing
+License
+Introduction
+Nova Financial Solutions aims to enhance its predictive analytics capabilities to significantly boost financial forecasting accuracy and operational efficiency. This project focuses on analyzing financial news sentiment and its correlation with stock price movements. It involves setting up a Python environment, using Git for version control, implementing CI/CD practices, and performing exploratory and quantitative data analysis.
 
-1. Repository Setup
-Created a GitHub repository with a dedicated branch: feature/task-1.
-Committed progress at least three times a day with descriptive messages.
-2. Exploratory Data Analysis (EDA)
+Task 1: Git and GitHub
+Objectives:
+Dev Environment Setup: Establish a Python environment and GitHub repository.
+Git Version Control: Utilize Git for version control.
+CI/CD: Implement continuous integration and continuous deployment practices.
+Tasks:
+Create a GitHub repository to host all the code for this week.
+Set up a Python environment.
+Create at least one new branch called "task-1" for ongoing development.
+Commit your work at least three times a day with descriptive commit messages.
+Perform Exploratory Data Analysis (EDA):
 Descriptive Statistics:
-    Analyzed headline lengths to understand textual data distribution.
-    Identified the most active publishers and their contributions.
-    Studied publication dates to observe trends over time.
-3. Text Analysis
-Sentiment Analysis: Classified headlines as Positive, Negative, or Neutral.
-Topic Modeling: Identified common keywords and significant topics like "FDA approval" and "price target".
-4. Time Series Analysis
-Analyzed publication frequency trends and identified spikes in news activity.
-Studied publishing times to discover peak hours of news releases.
-5. Publisher Analysis
-Identified top publishers and analyzed their focus areas.
-Extracted unique email domains (if available) to group contributors.
-How to Use
-Clone the Repository:
-git clone https://github.com/naolatomsa/Nova-Financial-Solutions.git
-cd Nova-Financial-Solutions
+Obtain basic statistics for textual lengths (like headline length).
+Count the number of articles per publisher.
+Analyze publication dates for trends.
+Text Analysis (Sentiment Analysis & Topic Modeling):
+Perform sentiment analysis on headlines.
+Use NLP to identify common keywords or phrases.
+Time Series Analysis:
+Analyze publication frequency over time.
+Identify spikes in article publications related to market events.
+Publisher Analysis:
+Identify the most active publishers.
+If email addresses are used as publisher names, extract unique domains.
+Suggested Folder Structure:
+markdown
+Copy code
+├── .vscode/
+│   └── settings.json
+├── .github/
+│   └── workflows
+│       ├── unittests.yml
+├── .gitignore
+├── requirements.txt
+├── README.md
+├── src/
+│   ├── __init__.py
+├── notebooks/
+│   ├── __init__.py
+│   └── README.md
+├── tests/
+│   ├── __init__.py
+└── scripts/
+    ├── __init__.py
+    └── README.md
+Task 2: Quantitative Analysis using PyNance and TA-Lib
+Objectives:
+Use additional finance data.
+Apply technical indicators to stock price data.
+Visualize data to understand the impact of indicators on stock prices.
+Tasks:
+Merge necessary branches from task-1 into the main branch using a Pull Request (PR).
+Create at least one new branch called "task-2" for ongoing development.
+Prepare your data by loading stock price data into a pandas DataFrame.
+Apply TA-Lib indicators such as moving averages, RSI, and MACD.
+Use PyNance for financial metrics.
+Visualize data to show the impact of different indicators on stock price movements.
+KPIs:
+Proactivity to self-learn - sharing references.
+Accuracy of indicators.
+Completeness of data analysis.
+Task 3: Correlation between News and Stock Movement
+Objectives:
+Align dates between news and stock datasets.
+Perform sentiment analysis on news headlines.
+Calculate stock movements and analyze their correlation with news sentiment.
+Tasks:
+Merge necessary branches from task-2 into the main branch using a Pull Request (PR).
+Create at least one new branch called "task-3" for ongoing development.
+Normalize dates to align news and stock datasets.
+Perform sentiment analysis using NLP tools like nltk, TextBlob.
+Calculate daily stock returns.
+Compute correlation between sentiment scores and stock returns.
+KPIs:
+Proactivity to self-learn - sharing references.
+Sentiment analysis accuracy.
+Correlation strength.
+Getting Started
+Clone the repository:
 
-Switch to Task-1 Branch:
+bash
+Copy code
+git clone https://github.com/your-username/predictive-analytics-project.git
+cd predictive-analytics-project
+Set up the Python environment:
 
-git checkout feature/task-1
+bash
+Copy code
+pip install -r requirements.txt
+Initialize Git:
 
-Run the Notebook:
+bash
+Copy code
+git init
+git branch task-1
+git branch task-2
+git branch task-3
+Folder Structure
+The project follows a structured folder layout to maintain organization and ease of access:
 
-    Install dependencies:
+markdown
+Copy code
+├── .vscode/
+│   └── settings.json
+├── .github/
+│   └── workflows
+│       ├── unittests.yml
+├── .gitignore
+├── requirements.txt
+├── README.md
+├── src/
+│   ├── __init__.py
+├── notebooks/
+│   ├── __init__.py
+│   └── README.md
+├── tests/
+│   ├── __init__.py
+└── scripts/
+    ├── __init__.py
+    └── README.md
+.vscode/: VSCode settings for development environment.
+.github/: GitHub workflows for CI/CD.
+src/: Main source code.
+notebooks/: Jupyter notebooks for analysis.
+tests/: Unit tests for validation.
+scripts/: Utility scripts.
+KPIs and Requirements
+Dev Environment Setup: Ensure a clean setup with all dependencies.
+Relevant skill in the area demonstrated: Perform tasks with attention to detail and efficiency.
+Proactivity to self-learn: Share references and document your learning.
+Accuracy of indicators: Verify calculations and analysis.
+Completeness of data analysis: Ensure thoroughness in data preparation, analysis, and visualization.
+Contributing
+Feel free to fork this repository and contribute! Please ensure to:
 
-        pip install -r requirements.txt
-
-        Open and execute the Jupyter notebook.
-Key Files
-edaAnalysis.ipynb: Contains the analysis and visualizations.
-requirements.txt: List of required Python libraries.
-README.md: Documentation for this project.
-Technologies Used
-Libraries:
-    pandas, matplotlib, seaborn: Data manipulation and visualization.
-    TextBlob, NLTK: Sentiment analysis.
-    sklearn, gensim: Topic modeling.
-
-Task 2 Quantitative analysis
-This notebook analyzes stock price data by calculating technical indicators and financial metrics, and visualizing trends for better insights.
-
-Features
-Calculates technical indicators:
-    Simple Moving Average (SMA)
-    Relative Strength Index (RSI)
-    Moving Average Convergence Divergence (MACD)
-Computes financial metrics:
-    Daily Returns
-    Cumulative Returns
-Visualizes stock trends and key indicators.
-Usage
-Ensure your dataset includes Open, High, Low, Close, and Volume columns.
-Replace the sample data loading function with your dataset.
-Run the notebook to calculate metrics and generate visualizations.
-
-Task 3: Correlation Between News and Stock Movement
-Objective
-Analyze the relationship between news sentiment and stock price movements.
-
-Steps
-Data Alignment: Normalize dates in news and stock datasets.
-Sentiment Analysis: Assign sentiment scores (Positive, Negative, Neutral) to news headlines using tools like TextBlob.
-Stock Returns: Calculate daily percentage changes in closing prices.
-Correlation: Compute the Pearson correlation coefficient between average daily sentiment scores and stock returns.
-Development
-Create a task-3 branch for development.
-Commit progress with clear messages.
-Merge updates into main via a Pull Request (PR).
-KPIs
-Sentiment Analysis Accuracy
-Correlation Strength Analysis
+Create a new branch for each task.
+Commit regularly with descriptive messages.
+Open a Pull Request when you have completed your changes.
+License
+This project is licensed under the MIT License. See the LICENSE file for more information.
